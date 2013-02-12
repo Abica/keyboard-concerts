@@ -4,6 +4,6 @@ class Viewer < ActiveRecord::Base
   validates :rating,
     :presence => true,
     :inclusion => { :in => 1..5 },
-    :numericality
+    :numericality => true
 end
 
