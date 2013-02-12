@@ -18,6 +18,11 @@ class PerformanceController < ApplicationController
   def show
   end
 
+  def play_tune
+    notes = %{a long sentence for the purpose of playing a test song}.split("").map {|l| l[0] }
+    render :text => {:notes => notes}.to_json
+  end
+
   private
   def find_performance
     @uuid = params[:uuid]

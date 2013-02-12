@@ -25,5 +25,19 @@ $(function() {
     channel.bind('pusher:subscription_error', function(status) {
       console.log("issue", status);
     });
+
+
+    $.getJSON("/play_tune", function(json) {
+      var inc = 200;
+      var delay = inc;
+
+      $.each(json.notes, function(i, note) {
+        setTimeout(function() {
+          new Note(note);
+        }, delay);
+        delay += inc;
+
+      });
+    });
   }
 });

@@ -1,7 +1,7 @@
 function Note(key) {
   var data = [];
   console.log(key);
-  for (var i = 0; i < i000; i++) {
+  for (var i = 0; i < 1000; i++) {
     data[i] = key;
   }
 
