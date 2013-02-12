@@ -5,3 +5,7 @@
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
 KeyboardConcerts::Application.config.secret_token = '6fc1562d7e5cde60788aa7134de24d41a5ba220a8725f750f7a1fd033d3c912f97da57a0ab1b0559c4afb5c533b5647543349dbab985c9705700518dc72468b6'
+
+Pusher.app_id = ENV['PUSHER_APP_ID']
+Pusher.key = ENV['PUSHER_KEY']
+Pusher.secret = ENV['PUSHER_SECRET']

@@ -1,0 +1,5 @@
+= form_for(Performance.new, :url => "/play") do |f|
+  = f.submit 'PERFORM', :class => "frame punch", :id => "top-frame"
+
+= form_for(Performance.new, :url => "/watch") do |f|
+  = f.submit 'OBSERVE', :class => "frame punch", :id => "bottom-frame"
