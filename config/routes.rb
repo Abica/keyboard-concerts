@@ -2,6 +2,26 @@ KeyboardConcerts::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
+  root :to => "root#index"
+
+  match '/play' => 'performance#play', :as => :play, :via => :post
+  match '/watch' => 'performance#watch', :as => :watch, :via => :post
+
+  match '/:uuid' => 'performance#create',
+    :as => :performance,
+    :via => :post,
+    :constraints => { :length => 36, :format => /[a-z0-9-]{36,36}/ }
+
+  match '/:uuid' => 'performance#show',
+    :as => :performance,
+    :via => :get,
+    :constraints => { :length => 36, :format => /[a-z0-9-]{36,36}/ }
+
+  match '/:uuid' => 'performance#replay',
+    :as => :performance,
+    :via => :get,
+    :constraints => { :length => 36, :format => /[a-z0-9-]{36,36}/ }
+
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
