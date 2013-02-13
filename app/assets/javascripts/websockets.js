@@ -26,12 +26,29 @@ $(function() {
 
     new Keyboard();
     $(document).keypress(function(e) {
+      if (e.shiftKey) {
+        $("#keyboard-normal").hide();
+        $("#keyboard-shift").show();
+
+      } else {
+        $("#keyboard-normal").show();
+        $("#keyboard-shift").hide();
+      }
+
       var note = e.charCode;
-      new Note(note + 200);
+      new Note(note);
       var node = $("#letter-" + note);
 
       node.fadeTo(50, 0.2).fadeTo(50, 1.0);
     });
+
+    $(document).keyup(function(e) {
+      if (!e.shiftKey) {
+        $("#keyboard-normal").show();
+        $("#keyboard-shift").hide();
+      }
+    });
+
 
     /*
     $.getJSON("/play_tune", function(json) {
