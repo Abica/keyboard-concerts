@@ -1,6 +1,7 @@
 KeyboardConcerts::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
+  UUID_CONSTRAINTS = { :length => 36, :format => /[a-z0-9-]{36,36}/ }
 
   root :to => "root#index"
 
@@ -11,17 +12,17 @@ KeyboardConcerts::Application.routes.draw do
   match '/:uuid' => 'performance#create',
     :as => :performance,
     :via => :post,
-    :constraints => { :length => 36, :format => /[a-z0-9-]{36,36}/ }
+    :constraints => UUID_CONSTRAINTS
 
   match '/:uuid' => 'performance#show',
     :as => :performance,
     :via => :get,
-    :constraints => { :length => 36, :format => /[a-z0-9-]{36,36}/ }
+    :constraints => UUID_CONSTRAINTS
 
   match '/:uuid' => 'performance#replay',
     :as => :performance,
     :via => :get,
-    :constraints => { :length => 36, :format => /[a-z0-9-]{36,36}/ }
+    :constraints => UUID_CONSTRAINTS
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'

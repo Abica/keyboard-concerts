@@ -1,4 +1,5 @@
 $(function() {
+return;
   if (typeof Pusher == 'undefined') {
     console.log("Pusher undefined");
     Pusher = function() {};
@@ -14,7 +15,6 @@ $(function() {
   var pusher = new Pusher('9dda803ec1b86517972e');
   var chanName = (location.pathname.match(/([a-z0-9-]+)/) || [])[0];
   if (chanName) {
-    console.log(chanName);
     var channel = pusher.subscribe(chanName);
     channel.bind('note-played', function(data) {
       alert("HERE", data);
@@ -28,12 +28,12 @@ $(function() {
 
 
     $.getJSON("/play_tune", function(json) {
-      var inc = 200;
+      var inc = 400;
       var delay = inc;
 
       $.each(json.notes, function(i, note) {
         setTimeout(function() {
-          new Note(note);
+        //  new Note(note * 5);
         }, delay);
         delay += inc;
 

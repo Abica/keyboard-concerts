@@ -7,15 +7,12 @@ class Performance < ActiveRecord::Base
 
   validates :uuid, :presence => true, :format => { :with => /\A[-a-z0-9]{36,36}\Z/i }
 
-  scope :filling,
-    joins(:viewers).
-    select('performances.id').
+  scope :open_seat,
+    joins("left join viewers on viewers.performance_id = performances.id").
     group('viewers.performance_id').
-    having('count(viewers.performance_id) < ?', MAX_VIEWERS)
-
-  scope :empty,
-    joins(:viewers).
-    where("viewers.performance_id IS NULL")
+    having('count(viewers.performance_id) < ?', MAX_VIEWERS).
+    order(:created_at).
+    limit(1)
 
 
   before_validation :generate_uuid, :on => :create

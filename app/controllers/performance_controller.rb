@@ -5,7 +5,6 @@ class PerformanceController < ApplicationController
     performance = Performance.create
     uuid = performance.uuid
 
-    channel(uuid).trigger('note-played', {:note => ?b})
     redirect_to '/' + uuid
   end
 
@@ -19,7 +18,10 @@ class PerformanceController < ApplicationController
   end
 
   def play_tune
-    notes = %{a long sentence for the purpose of playing a test song}.split("").map {|l| l[0] }
+    letters = %{a long sentence for the purpose of playing a test song}
+    letters = ((0..9).to_a + ('a'..'z').to_a + ('A'..'Z').to_a).join
+    notes = letters.split("").map {|l| l[0] }
+
     render :text => {:notes => notes}.to_json
   end
 
