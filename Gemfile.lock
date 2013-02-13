@@ -75,6 +75,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.21)
     multi_json (1.5.1)
+    pg (0.14.1)
     polyglot (0.3.3)
     pusher (0.11.3)
       multi_json (~> 1.0)
@@ -141,6 +142,7 @@ DEPENDENCIES
   html5-rails
   jquery-rails
   json
+  pg
   pusher
   rails (= 3.2.12)
   sass-rails (~> 3.2.3)
