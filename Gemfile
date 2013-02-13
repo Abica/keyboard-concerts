@@ -11,6 +11,8 @@ gem 'uuid'
 gem 'uuidtools'
 gem 'pusher'
 
+gem 'bourbon'
+
 group :production, :staging do
   gem "pg"
 end
