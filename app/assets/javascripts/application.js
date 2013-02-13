@@ -14,5 +14,3 @@
 // = require h5bp
 // = require riffwave
 // = require keyboard
-// = require websockets
-
