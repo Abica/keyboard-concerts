@@ -8,6 +8,7 @@ KeyboardConcerts::Application.routes.draw do
   match '/play' => 'performance#play', :as => :play, :via => :post
   match '/watch' => 'performance#watch', :as => :watch, :via => :post
   match '/play_tune' => 'performance#play_tune', :as => :play_tune, :via => :get
+  match '/pusher/auth' => 'pusher#auth', :via => :post
 
   match '/:uuid' => 'performance#create',
     :as => :performance,

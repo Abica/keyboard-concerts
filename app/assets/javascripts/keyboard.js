@@ -118,7 +118,6 @@ function generateKeyboards() {
 
 $(document).ready(function() {
   if (location.pathname.length == 37 || location.pathname.indexOf("watch") != -1) {
-    generateKeyboards();
   }
 
   var faces = $(".face-button");

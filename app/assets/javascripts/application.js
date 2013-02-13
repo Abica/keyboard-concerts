@@ -14,3 +14,4 @@
 // = require h5bp
 // = require riffwave
 // = require keyboard
+// = require pusher_events
