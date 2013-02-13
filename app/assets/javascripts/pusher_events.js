@@ -10,18 +10,22 @@ doc.ready(function() {
 
   WEB_SOCKET_DEBUG = true;
   var pusher = new Pusher(PUSHER_KEY);
-  var noteChannel = pusher.subscribe("private-" + UUID);
+  var privateChannel = pusher.subscribe("private-" + UUID);
   var channel = pusher.subscribe(UUID);
 
-  channel.bind("note-received", function(data) {
-    delayNote(data.note, 0);
+  channel.bind("user-entered", function(data) {
+    console.log("viewer entered");
   });
 
-  noteChannel.bind("client-note-received", function(data) {
+  privateChannel.bind("client-note-received", function(data) {
     delayNote(data.note, 0);
   });
 
   generateKeyboards();
+
+  if (location.pathname.length == 37 || location.pathname.indexOf("watch") != -1) {
+    return;
+  }
 
   doc.keypress(function(e) {
     if (e.shiftKey) {
@@ -33,7 +37,13 @@ doc.ready(function() {
       $("#keyboard-shift").hide();
     }
 
-    noteChannel.trigger("client-note-received", {"note": e.charCode});
+    var note = e.charCode
+
+    $.post('/' + UUID + '/keys', {'key': note}, function(data) {});
+
+    privateChannel.trigger("client-note-received", {"note": note});
+
+    delayNote(note, 0);
   });
 
   doc.keyup(function(e) {

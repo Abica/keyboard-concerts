@@ -4,31 +4,24 @@ KeyboardConcerts::Application.routes.draw do
   UUID_CONSTRAINTS = { :length => 36, :format => /[a-z0-9-]{36,36}/ }
 
   root :to => "root#index"
-
-  match '/play' => 'performance#play', :as => :play, :via => :post
-  match '/watch' => 'performance#watch', :as => :watch, :via => :post
-  match '/play_tune' => 'performance#play_tune', :as => :play_tune, :via => :get
   match '/pusher/auth' => 'pusher#auth', :via => :post
+  match '/pusher/event' => 'pusher#event', :via => :post
+
+  match '/play' => 'performance#play', :as => :create_play, :via => :post
+  match '/watch' => 'performance#watch', :as => :create_watch, :via => :post
+
+  match '/:uuid/keys' => 'keys#create', :as => :create_key, :via => :post
+
+  match '/:id/:uuid' => 'performance#show_time', :as => :show_time
 
   match '/:uuid' => 'performance#create',
-    :as => :performance,
     :via => :post,
+    :as => :create_performance,
     :constraints => UUID_CONSTRAINTS
 
   match '/:uuid' => 'performance#show',
-    :as => :performance,
-    :via => :get,
-    :constraints => UUID_CONSTRAINTS
-
-  match '/:uuid/watch' => 'performance#show',
     :viewing => true,
-    :as => :performance,
-    :via => :get,
-    :constraints => UUID_CONSTRAINTS
-
-
-  match '/:uuid' => 'performance#replay',
-    :as => :performance,
+    :as => :show,
     :via => :get,
     :constraints => UUID_CONSTRAINTS
 

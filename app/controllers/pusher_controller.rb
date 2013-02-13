@@ -1,5 +1,8 @@
 class PusherController < ApplicationController
-  protect_from_forgery :except => :auth # stop rails CSRF protection for this action
+  protect_from_forgery :except => [:auth, :event]
+
+  def event
+  end
 
   def auth
     channel_name = params[:channel_name]
@@ -14,6 +17,7 @@ class PusherController < ApplicationController
         }
       })
       render :json => response
+
     else
       # We're allowing anonymous users
       response = channel.authenticate(params[:socket_id], {
@@ -22,8 +26,6 @@ class PusherController < ApplicationController
       })
       render :json => response
 
-      # You might alternatively want to deny them:
-      # render :text => "Not authorized", :status => '403'
     end
   end
 

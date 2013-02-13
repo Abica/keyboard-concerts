@@ -88,37 +88,9 @@ function selfPlay() {
 
 function generateKeyboards() {
   new Keyboard();
-
-  // no keyboard input in watch mode
-  if (location.pathname.indexOf("watch") != -1) {
-    selfPlay();
-    return;
-  }
-
-  $(document).keypress(function(e) {
-    if (e.shiftKey) {
-      $("#keyboard-normal").hide();
-      $("#keyboard-shift").show();
-
-    } else {
-      $("#keyboard-normal").show();
-      $("#keyboard-shift").hide();
-    }
-
-    delayNote(e.charCode, 0);
-  });
-
-  $(document).keyup(function(e) {
-    if (!e.shiftKey) {
-      $("#keyboard-normal").show();
-      $("#keyboard-shift").hide();
-    }
-  });
 }
 
 $(document).ready(function() {
-  if (location.pathname.length == 37 || location.pathname.indexOf("watch") != -1) {
-  }
 
   var faces = $(".face-button");
   faces.fadeTo(50, 0.2);

@@ -1,29 +1,29 @@
 class PerformanceController < ApplicationController
   protect_from_forgery
 
-  before_filter 'find_performance', :only => :show
+  before_filter 'find_performance', :only => [:show, :show_time]
 
   def play
     performance = Performance.create
     uuid = performance.uuid
 
-    redirect_to '/' + uuid
+    redirect_to show_time_path(performance.id, performance.uuid)
   end
 
   def watch
     performance = Performance.first
 
-    redirect_to '/' + performance.uuid + '/watch'
+    redirect_to show_path(performance.uuid)
   end
 
   def show
-    Pusher[@uuid].trigger('note-received', {'note' => 53})
   end
 
-  private
-  def find_performance
-    @uuid = params[:uuid]
+  def show_time
+    unless @performance.id == params["id"].to_i
+      redirect_to root_path
+    end
 
-    @performance = Performance.where(:uuid => @uuid)
+    render :show
   end
 end
