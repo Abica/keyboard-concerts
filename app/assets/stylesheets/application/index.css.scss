@@ -68,3 +68,18 @@ h1 {
   font-size: 32px;
 }
 
+
+.letter {
+  display: inline-block;
+  width: 50px;
+  margin: 0.2em;
+  min-height: 50px;
+  background: transparent;
+  vertical-align: top;
+  box-shadow: 2px 2px 5px #083009;
+  border: 1px solid #000;
+  padding-top: 1.5em;
+
+  zoom: 1;
+  *display: inline;
+}

@@ -1,5 +1,4 @@
 $(function() {
-return;
   if (typeof Pusher == 'undefined') {
     console.log("Pusher undefined");
     Pusher = function() {};
@@ -27,17 +26,28 @@ return;
     });
 
 
+    new Keyboard();
+    $(document).keypress(function(e) {
+      var note = e.charCode;
+      new Note(note + 200);
+      var node = $("#letter-" + note);
+
+      node.fadeTo(100, 0.5).fadeTo(100, 1.0);
+    });
+
+    /*
     $.getJSON("/play_tune", function(json) {
       var inc = 400;
       var delay = inc;
 
       $.each(json.notes, function(i, note) {
         setTimeout(function() {
-        //  new Note(note * 5);
+          new Note(note * 5);
         }, delay);
         delay += inc;
 
       });
     });
+    */
   }
 });

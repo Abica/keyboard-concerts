@@ -1,4 +1,6 @@
 class PerformanceController < ApplicationController
+  protect_from_forgery
+
   before_filter 'find_performance', :only => :show
 
   def play
@@ -15,6 +17,7 @@ class PerformanceController < ApplicationController
   end
 
   def show
+    Pusher['private-' + @uuid].trigger('notes', {'message' => 'hello world'})
   end
 
   def play_tune
