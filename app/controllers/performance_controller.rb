@@ -11,7 +11,7 @@ class PerformanceController < ApplicationController
   end
 
   def watch
-    performance = Performance.first
+    performance = Performance.last
 
     redirect_to show_path(performance.uuid)
   end

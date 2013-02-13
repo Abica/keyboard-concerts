@@ -1,10 +1,10 @@
 = Description
 Keyboard Concert is a little 24 hour project that lets users play virtual concerts for other people with just their keyboard.
 
-Users will have the ability to judge currently playing songs or watch passed concerts.
+Users will eventually have the ability to judge currently playing songs or watch past concerts.
 
 = Installation
-This app requires pusher, so you will need to signup for an account http://pusher.com/.
+This app requires pusher, so you will need to signup for an account http://pusher.com.
 
 Set these to the environment variables so they will be used by the app. e.g.
 
