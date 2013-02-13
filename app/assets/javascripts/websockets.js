@@ -20,11 +20,9 @@ $(function() {
       new Note(data.key);
     });
 
-
     channel.bind('pusher:subscription_error', function(status) {
       console.log("issue", status);
     });
-
 
     new Keyboard();
     $(document).keypress(function(e) {
@@ -32,7 +30,7 @@ $(function() {
       new Note(note + 200);
       var node = $("#letter-" + note);
 
-      node.fadeTo(100, 0.5).fadeTo(100, 1.0);
+      node.fadeTo(50, 0.2).fadeTo(50, 1.0);
     });
 
     /*
