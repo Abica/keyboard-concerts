@@ -5,7 +5,7 @@ function Note(key) {
   var numNotes = 1000;
 
   var baseFreq = function(index) {
-    var r = 2 * Math.PI * 440.0 * Math.pow(2, (key - 69) / 12.0) / sampleRateHz;
+    var r = 2 * Math.PI * 440.0 * Math.pow(2, key / 12.0) / sampleRateHz;
     return r;
   };
 
