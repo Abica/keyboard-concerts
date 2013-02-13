@@ -1,6 +1,7 @@
 -if params[:viewing]
-  -1.upto(5) do |i|
-    =image_tag("rating_#{i}.png", :class => "face-button")
+  #face-buttons
+    -1.upto(5) do |i|
+      =image_tag("rating_#{i}.png", :class => "face-button")
 
 =javascript_include_tag "http://js.pusher.com/1.12/pusher.min.js"
 :javascript

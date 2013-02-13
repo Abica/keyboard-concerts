@@ -60,7 +60,7 @@ function Keyboard() {
       html += "<ul class=\"letter-row\">" + keys + "</ul>";
     });
 
-    var keyboard = $("#main").append("<div id=\"keyboard-" + state + "\">" + html + "</div>");
+    var keyboard = $("#main").prepend("<div id=\"keyboard-" + state + "\">" + html + "</div>");
   });
 
   $("#keyboard-shift").hide();
