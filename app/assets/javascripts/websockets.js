@@ -24,32 +24,7 @@ $(function() {
       console.log("issue", status);
     });
 
-    new Keyboard();
-    $(document).keypress(function(e) {
-      if (e.shiftKey) {
-        $("#keyboard-normal").hide();
-        $("#keyboard-shift").show();
-
-      } else {
-        $("#keyboard-normal").show();
-        $("#keyboard-shift").hide();
-      }
-
-      var note = e.charCode;
-      new Note(note);
-      var node = $("#letter-" + note);
-
-      node.fadeTo(50, 0.2).fadeTo(50, 1.0);
-    });
-
-    $(document).keyup(function(e) {
-      if (!e.shiftKey) {
-        $("#keyboard-normal").show();
-        $("#keyboard-shift").hide();
-      }
-    });
-
-
+    generateKeyboards();
     /*
     $.getJSON("/play_tune", function(json) {
       var inc = 400;

@@ -1,14 +1,22 @@
 function Note(key) {
   var data = [];
 
-  console.log(key);
-  for (var i = 0; i < 1000; i++) {
-    data[i] = key;
+  var sampleRateHz = 44100;
+  var numNotes = 1000;
+
+  var baseFreq = function(index) {
+    var r = 2 * Math.PI * 440.0 * Math.pow(2, (key - 69) / 12.0) / sampleRateHz;
+    return r;
+  };
+
+  for (var i = 0; i < numNotes; i++) {
+    var l = 2 * sampleRateHz / numNotes;
+    data[i] = 64 + 32 * Math.round(Math.sin(baseFreq(Math.round(i / l)) * i));
   }
 
   var wave = new RIFFWAVE(data);
   wave.header.sampleRate = 44100;
-  wave.header.numChannels = 2;
+  wave.header.numChannels = 1;
 
   var audio = new Audio(wave.dataURI);
   audio.play();
@@ -47,3 +55,31 @@ function Keyboard() {
 
   $("#keyboard-shift").hide();
 }
+
+function generateKeyboards() {
+  new Keyboard();
+  $(document).keypress(function(e) {
+    if (e.shiftKey) {
+      $("#keyboard-normal").hide();
+      $("#keyboard-shift").show();
+
+    } else {
+      $("#keyboard-normal").show();
+      $("#keyboard-shift").hide();
+    }
+
+    var note = e.charCode;
+    new Note(note);
+    var node = $("#letter-" + note);
+
+    node.fadeTo(50, 0.2).fadeTo(50, 1.0);
+  });
+
+  $(document).keyup(function(e) {
+    if (!e.shiftKey) {
+      $("#keyboard-normal").show();
+      $("#keyboard-shift").hide();
+    }
+  });
+}
+
