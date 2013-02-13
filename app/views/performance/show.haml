@@ -1,13 +1,14 @@
-= javascript_include_tag "http://js.pusher.com/1.12/pusher.min.js"
+-if params[:viewing]
+  -1.upto(5) do |i|
+    =image_tag("rating_#{i}.png", :class => "face-button")
+
+=javascript_include_tag "http://js.pusher.com/1.12/pusher.min.js"
 :javascript
   $(document).ready(function() {
-    /*
+
     Pusher.log = function(message) {
       if (window.console && window.console.log) window.console.log(message);
     };
-
-    // Flash fallback logging - don't include this in production
-    WEB_SOCKET_DEBUG = true;
 
     WEB_SOCKET_DEBUG = true;
     var pusher = new Pusher('#{Pusher.key}');
@@ -26,5 +27,4 @@
     channel.bind('subscription_error', function(status) {
       $('div#status').text('Pusher subscription_error');
     });
-    */
   });

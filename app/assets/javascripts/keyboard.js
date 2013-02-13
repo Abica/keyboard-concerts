@@ -1,3 +1,13 @@
+function delayNote(note, delay) {
+  setTimeout(function() {
+    new Note(note);
+
+    var node = $("#letter-" + note);
+
+    node.fadeTo(50, 0.2).fadeTo(50, 1.0);
+  }, delay);
+}
+
 function Note(key) {
   var data = [];
 
@@ -56,8 +66,35 @@ function Keyboard() {
   $("#keyboard-shift").hide();
 }
 
+function selfPlay() {
+  var numNotes = 100;
+  var letters = $(".letter:visible");
+
+  var inc = 200;
+  var delay = inc;
+  for (var i = 0; i < numNotes; i++) {
+    var letterIndex = Math.floor(Math.random() * letters.length);
+    var letter = $(letters[letterIndex]);
+    var note_matches = letter.attr("id").match(/(\d+)/);
+    var note = parseInt((note_matches || [])[0], 10);
+
+    if (note) {
+      delayNote(note, delay);
+
+      delay += Math.floor(Math.random() * inc) + inc;
+    }
+  }
+}
+
 function generateKeyboards() {
   new Keyboard();
+
+  // no keyboard input in watch mode
+  if (location.pathname.indexOf("watch") != -1) {
+    selfPlay();
+    return;
+  }
+
   $(document).keypress(function(e) {
     if (e.shiftKey) {
       $("#keyboard-normal").hide();
@@ -68,11 +105,7 @@ function generateKeyboards() {
       $("#keyboard-shift").hide();
     }
 
-    var note = e.charCode;
-    new Note(note);
-    var node = $("#letter-" + note);
-
-    node.fadeTo(50, 0.2).fadeTo(50, 1.0);
+    delayNote(e.charCode, 0);
   });
 
   $(document).keyup(function(e) {
@@ -84,7 +117,39 @@ function generateKeyboards() {
 }
 
 $(document).ready(function() {
-  if (location.pathname.length == 37) {
+  if (location.pathname.length == 37 || location.pathname.indexOf("watch") != -1) {
     generateKeyboards();
   }
+
+  var faces = $(".face-button");
+  faces.fadeTo(50, 0.2);
+
+  faces.mouseover(function(e) {
+    var target = $(e.target);
+
+    target.fadeTo(50, 1.0);
+  });
+
+  faces.mouseout(function(e) {
+    var target = $(e.target);
+    if (!target.data("selected")) {
+      target.fadeTo(50, 0.2);
+    }
+  });
+
+  faces.click(function(e) {
+    var target = $(e.target);
+
+    faces.map(function(i, el) {
+      var face = $(el);
+      if (e.target != el) {
+        face.fadeTo(50, 0.2);
+        face.data("selected", false);
+      }
+    });
+
+    target.data("selected", true);
+
+    target.fadeTo(50, 1.0);
+  });
 });

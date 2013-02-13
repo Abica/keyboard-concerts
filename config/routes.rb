@@ -19,6 +19,13 @@ KeyboardConcerts::Application.routes.draw do
     :via => :get,
     :constraints => UUID_CONSTRAINTS
 
+  match '/:uuid/watch' => 'performance#show',
+    :viewing => true,
+    :as => :performance,
+    :via => :get,
+    :constraints => UUID_CONSTRAINTS
+
+
   match '/:uuid' => 'performance#replay',
     :as => :performance,
     :via => :get,

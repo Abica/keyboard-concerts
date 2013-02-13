@@ -13,11 +13,11 @@ class PerformanceController < ApplicationController
   def watch
     performance = Performance.first
 
-    redirect_to '/' + performance.uuid
+    redirect_to '/' + performance.uuid + '/watch'
   end
 
   def show
-    Pusher['private-' + @uuid].trigger('notes', {'message' => 'hello world'})
+    Pusher[@uuid].trigger('notes', {'message' => 'hello world'})
   end
 
   def play_tune
