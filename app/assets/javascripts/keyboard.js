@@ -10,7 +10,7 @@ function Note(key) {
   };
 
   for (var i = 0; i < numNotes; i++) {
-    var l = 2 * sampleRateHz / numNote;
+    var l = 2 * sampleRateHz / numNotes;
     data[i] = 64 + 32 * Math.round(Math.sin(baseFreq(Math.round(i / l)) * i));
   }
 
